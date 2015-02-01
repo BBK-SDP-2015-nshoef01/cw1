@@ -1,15 +1,23 @@
 package cw1;
 
 public class OutInstruction extends Instruction{
+	
+	private int result;
 
 	public OutInstruction(String l, String op) {
 		super(l, op);
-		// TODO Auto-generated constructor stub
 	}
+	
+	public OutInstruction(String label, int result) {
+		this(label, "out");
+		this.result = result;
+	}
+
 
 	@Override
 	public void execute(Machine m) {
-		// TODO Auto-generated method stub
+		int value1 = m.getRegisters().getRegister(result);
+		System.out.println(value1);
 		
 	}
 
