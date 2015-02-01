@@ -30,5 +30,13 @@ public class Testings {
 		m.execute();
 		assertEquals(m.getRegisters().getRegister(3), 14);
 	}
+	@Test
+	public void testExecuteDiv(){
+		Machine m = new Machine();
+		Translator t = new Translator("Div.txt");
+		t.readAndTranslate(m.getLabels(), m.getProg());
+		m.execute();
+		assertEquals(m.getRegisters().getRegister(3), 2);
+	}
 
 }
