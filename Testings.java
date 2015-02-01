@@ -33,10 +33,18 @@ public class Testings {
 	@Test
 	public void testExecuteDiv(){
 		Machine m = new Machine();
-		Translator t = new Translator("Div.txt");
+		Translator t = new Translator("div.txt");
 		t.readAndTranslate(m.getLabels(), m.getProg());
 		m.execute();
 		assertEquals(m.getRegisters().getRegister(3), 2);
+	}
+	@Test
+	public void testExecuteOut(){
+		Machine m = new Machine();
+		Translator t = new Translator("out.txt");
+		t.readAndTranslate(m.getLabels(), m.getProg());
+		m.execute();
+		assertEquals(m.getProg().get(1).opcode, "out");	
 	}
 
 }
