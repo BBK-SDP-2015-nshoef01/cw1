@@ -21,5 +21,14 @@ public class Testings {
 		m.execute();
 		assertEquals(m.getRegisters().getRegister(3),16);
 	}
+	
+	@Test
+	public void testExecuteMul(){
+		Machine m = new Machine();
+		Translator t = new Translator("mul.txt");
+		t.readAndTranslate(m.getLabels(), m.getProg());
+		m.execute();
+		assertEquals(m.getRegisters().getRegister(3), 14);
+	}
 
 }
