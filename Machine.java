@@ -65,10 +65,16 @@ public class Machine {
 	public void execute() {
 		setPc(0);
 		setRegisters(new Registers());
+		execute(0);
+	}
+	
+	public void execute(int pc){
+		setPc(pc);
 		while (getPc() < getProg().size()) {
 			Instruction ins = getProg().get(getPc());
 			setPc(getPc() + 1);
 			ins.execute(this);
 		}
+		
 	}
 }

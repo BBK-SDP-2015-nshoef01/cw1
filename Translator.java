@@ -76,6 +76,7 @@ public class Translator {
 		int s2;
 		int r;
 		int x;
+		String l; 
 
 		if (line.equals(""))
 			return null;
@@ -107,8 +108,12 @@ public class Translator {
 			s2 = scanInt();
 			return new DivInstruction(label, r, s1, s2);
 		case "out":
+			x = scanInt();
+			return new OutInstruction(label, x);
+		case "bnz":
 			r = scanInt();
-			return new OutInstruction(label, r);
+			l = scan();
+			return new BnzInstruction(label, r, l);
 		}
 		
 
@@ -123,7 +128,6 @@ public class Translator {
 	 */
 	private String scan() {
 		line = line.trim();
-		//System.out.println(line);
 		if (line.length() == 0)
 			return "";
 
