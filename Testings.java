@@ -46,5 +46,13 @@ public class Testings {
 		m.execute();
 		assertEquals(m.getProg().get(1).opcode, "out");	
 	}
+	@Test
+	public void testExecuteBnz(){
+		Machine m = new Machine();
+		Translator t = new Translator("bnz.txt");
+		t.readAndTranslate(m.getLabels(), m.getProg());
+		m.execute();
+		assertEquals(m.getRegisters().getRegister(2), 0);
+	}
 
 }
