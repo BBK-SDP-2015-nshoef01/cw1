@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.lang.reflect.*;
 
 /*
  * The translator of a <b>S</b><b>M</b>al<b>L</b> program.
@@ -72,54 +73,41 @@ public class Translator {
 	// removed. Translate line into an instruction with label label
 	// and return the instruction
 	public Instruction getInstruction(String label) {
-		int s1; // Possible operands of the instruction
-		int s2;
-		int r;
-		int x;
-		String l; 
-
+		Class<?> inst = null;
+		Instruction result = null;
+		
 		if (line.equals(""))
 			return null;
-
 		String ins = scan();
-		switch (ins) {
-		case "add":
-			r = scanInt();
-			s1 = scanInt();
-			s2 = scanInt();
-			return new AddInstruction(label, r, s1, s2);
-		case "lin":
-			r = scanInt();
-			s1 = scanInt();
-			return new LinInstruction(label, r, s1);
-		case "sub":
-			r = scanInt();
-			s1 = scanInt();
-			s2 = scanInt();
-			return new SubInstruction(label, r, s1, s2);
-		case "mul":
-			r = scanInt();
-			s1 = scanInt();
-			s2 = scanInt();
-			return new MulInstruction(label, r, s1, s2);
-		case "div":
-			r = scanInt();
-			s1 = scanInt();
-			s2 = scanInt();
-			return new DivInstruction(label, r, s1, s2);
-		case "out":
-			x = scanInt();
-			return new OutInstruction(label, x);
-		case "bnz":
-			r = scanInt();
-			l = scan();
-			return new BnzInstruction(label, r, l);
+		//Creation of the class name of the instruction
+		String name = ins.substring(0, 1).toUpperCase() + ins.substring(1, ins.length()) + "Instruction";
+		try {
+			inst = Class.forName("cw1."+name);
+		} catch (ClassNotFoundException e1) {
+			e1.printStackTrace();
 		}
-		
-
-		// You will have to write code here for the other instructions.
-
-		return null;
+		// Getting the number and the types of the parameters
+		Class<?>[] prm = inst.getConstructors()[1].getParameterTypes();
+		Object[] o = new Object[prm.length];
+		o[0] = label;
+		//  Initialisation of the parameters
+		for(int i = 1 ; i<prm.length; i++) {
+			if (prm[i].getName() == "int"){
+		    	o[i] = scanInt();
+			} else {
+				o[i] = scan();
+			}
+		}
+		// Creating an instance of the instruction to be returned
+	    try {
+			result = (Instruction) inst.getDeclaredConstructors()[1].newInstance(o);
+		} catch (InstantiationException | IllegalAccessException
+				| IllegalArgumentException | InvocationTargetException
+				| SecurityException e) {
+			
+			e.printStackTrace();
+		}	
+		return result;
 	}
 
 	/*
@@ -137,6 +125,7 @@ public class Translator {
 		}
 		String word = line.substring(0, i);
 		line = line.substring(i);
+		//System.out.println(word);
 		return word;
 	}
 

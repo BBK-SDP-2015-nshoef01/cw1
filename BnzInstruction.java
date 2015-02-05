@@ -23,5 +23,9 @@ public class BnzInstruction extends Instruction {
 		}
 	
 	}
+	@Override
+	public String toString() {
+		return super.toString() + " if register " + register + " is 0, move to label " + nextLabel;
+	}
 
 }
