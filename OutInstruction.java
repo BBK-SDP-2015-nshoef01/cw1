@@ -1,4 +1,9 @@
 package cw1;
+/**
+ * 
+ * @author Noam
+ * This instruction print out the value of a specified register.
+ */
 
 public class OutInstruction extends Instruction{
 	

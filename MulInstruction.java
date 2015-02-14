@@ -1,4 +1,9 @@
 package cw1;
+/**
+ * 
+ * @author Noam
+ * This instruction multiply the value of to registers and store it on a specified register.
+ */
 
 public class MulInstruction extends Instruction {
 	

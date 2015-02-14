@@ -1,5 +1,10 @@
 package cw1;
 
+/**
+ * 
+ * @author Noam
+ *This instruction divide the values of two registers and put it on a specified register.
+ */
 public class DivInstruction extends Instruction {
 	
 	private int result;

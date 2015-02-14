@@ -1,7 +1,7 @@
 package cw1;
 
 /**
- * This class ....
+ * This class create an instruction that takes register and a value and put the value on this register.
  * 
  * @author someone
  */

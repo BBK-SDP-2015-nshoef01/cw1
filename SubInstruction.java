@@ -1,4 +1,9 @@
 package cw1;
+/**
+ * 
+ * @author Noam
+ * This instruction subtract the value of one register by another and store it in a specified register.
+ */
 
 public class SubInstruction extends Instruction{
 	

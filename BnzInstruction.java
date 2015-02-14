@@ -1,4 +1,10 @@
 package cw1;
+/**
+ * 
+ * @author Noam
+ * This instruction check if the value of a specified register is not 0.
+ * If it's not, it instruct the machine to move to a specified label of the programme and keep the execution form there.
+ */
 
 public class BnzInstruction extends Instruction {
 	
